@@ -2,7 +2,7 @@ import io
 import joblib
 import pandas as pd
 from fastapi import FastAPI,HTTPException,UploadFile, File
-from fastapi.resposes import StreamingResponse
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
 app = FastAPI()
@@ -74,10 +74,10 @@ async def predict_file(file : UploadFile=File(...)):
             detail ="The file has to be of type CSV"
         )
     content = await file.read()
-    df = pd.DataFrame(io.BytesIO(content))
+    df = pd.read_csv(io.BytesIO(content))
 
     required_columns = [
-                        'MenInc',"HouseAge", 'AveRooms', 'AveBedrms',
+                        'MedInc',"HouseAge", 'AveRooms', 'AveBedrms',
                         'Population', 'AveOccup', 'Latitude', 'Longitude'
                         ]
     missing_columns = [
