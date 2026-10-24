@@ -1,0 +1,5 @@
+__pycache__/
+venv/
+*.pyc
+house_model.joblib
+house_features.joblib
